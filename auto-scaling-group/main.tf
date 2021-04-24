@@ -9,14 +9,14 @@ resource "aws_key_pair" "deployer" {
 }
 
 resource "aws_launch_configuration" "this" {
-  count         = var.create_asg ? 1 : 0
+  count = var.create_asg ? 1 : 0
 
-  name_prefix   = "myweb-lt-"
-  image_id      = data.aws_ami.amazon_linux.id
-  instance_type = "t3.micro"
-  # user_data         = file("bootstrap.sh")
+  name_prefix       = "myweb-lt-"
+  image_id          = data.aws_ami.amazon_linux.id
+  instance_type     = "t3.micro"
+  user_data         = data.template_file.bootstrap.rendered
   enable_monitoring = false
-  key_name = aws_key_pair.deployer.key_name
+  key_name          = aws_key_pair.deployer.key_name
   # security_groups   = ["sg-511da236"]
 
   ebs_block_device {

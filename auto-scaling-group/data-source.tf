@@ -31,3 +31,7 @@ data "aws_subnet_ids" "default" {
   vpc_id = data.aws_vpc.default.id
 
 }
+
+data "template_file" "bootstrap" {
+  template = "${file("${path.module}/bootstrap.tpl")}"
+}
