@@ -24,11 +24,6 @@ resource "aws_launch_template" "this" {
 
   # security_groups   = ["sg-511da236"]
 
-  # ebs_block_device {
-  #   device_name = "/dev/sdb"
-  #   volume_type = "gp2"
-  #   volume_size = 5
-  # }
   block_device_mappings {
     device_name = "/dev/sda1"
 
