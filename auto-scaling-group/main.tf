@@ -43,17 +43,35 @@ resource "aws_autoscaling_group" "asg" {
   name_prefix      = "myweb"
   max_size         = 3
   min_size         = 1
-  desired_capacity = 2
+  desired_capacity = 3
 
   health_check_grace_period = 300
   force_delete              = true
-  vpc_zone_identifier = data.aws_subnet_ids.default.ids
+  vpc_zone_identifier       = data.aws_subnet_ids.default.ids
 
   launch_template {
     id      = aws_launch_template.this[0].id
     version = "$Latest"
   }
 
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 30
+    }
+    triggers = ["tag"]
+  }
+
+  tag {
+    key                 = "Name"
+    value               = "nginx-web"
+    propagate_at_launch = true
+  }
+  tag {
+    key                 = "version"
+    value               = "1.1"
+    propagate_at_launch = true
+  }
 }
 
 resource "aws_autoscaling_schedule" "stop" {
