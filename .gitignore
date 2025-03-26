@@ -1,0 +1,10 @@
+# macOS system files
+.DS_Store
+
+# Terraform lock file
+# Terraform cache directory and plugins
+.terraform.lock.hcl
+.terraform/
+
+# Terraform state files
+terraform.tfstate

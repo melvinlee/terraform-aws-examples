@@ -68,14 +68,14 @@ resource "aws_iam_instance_profile" "ssm_instance_profile" {
 resource "aws_instance" "web_server" {
   ami                    = data.aws_ami.amazon_linux.id
   instance_type          = "t3.micro"
-  subnet_id              = tolist(data.aws_subnet_ids.default.ids)[0]
+  subnet_id              = tolist(data.aws_subnets.default.ids)[0]
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   iam_instance_profile   = aws_iam_instance_profile.ssm_instance_profile.name
   user_data              = file("${path.module}/user-data.sh")
 
   root_block_device {
     volume_size = 8
-    volume_type = "gp2"
+    volume_type = "gp3"
     encrypted   = true
   }
 
@@ -88,7 +88,7 @@ resource "aws_instance" "web_server" {
 resource "aws_ebs_volume" "data_volume" {
   availability_zone = aws_instance.web_server.availability_zone
   size              = 20
-  type              = "gp2"
+  type              = "gp3"
   encrypted         = true
 
   tags = {
