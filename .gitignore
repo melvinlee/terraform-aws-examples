@@ -8,3 +8,10 @@
 
 # Terraform state files
 terraform.tfstate
+
+# Terraform plan files
+*.tfplan
+
+# Terraform workspace files
+*.tfstate.*
+
