@@ -73,6 +73,9 @@ resource "aws_instance" "web_server" {
   iam_instance_profile   = aws_iam_instance_profile.ssm_instance_profile.name
   user_data              = file("${path.module}/user-data.sh")
 
+  # Use the variable to control public IP assignment
+  associate_public_ip_address = var.associate_public_ip
+  
   root_block_device {
     volume_size = 8
     volume_type = "gp3"

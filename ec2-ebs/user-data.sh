@@ -9,11 +9,12 @@ yum install -y python3-pip
 # Install Ansible
 pip3 install ansible --user
 
-# Create log directory for ansible output
-mkdir -p /var/log/ansible
-
-# Set appropriate permissions for log directory
-chmod 755 /var/log/ansible
+# Ensure log directory exists before writing to it
+if [ ! -d "/var/log/ansible" ]; then
+    mkdir -p /var/log/ansible
+    chmod 755 /var/log/ansible
+    echo "Created log directory: /var/log/ansible"
+fi
 
 # Install AWS collection for Ansible
 ansible-galaxy collection install amazon.aws
