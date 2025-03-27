@@ -47,6 +47,12 @@ terraform apply
 aws eks update-kubeconfig --region <region> --name <cluster_name>
 ```
 
+5. Deploy nginx
+
+```bash
+kubectl apply -f nginx/deployment.yaml
+```
+
 ## Verification
 
 To verify that Nginx is running:
