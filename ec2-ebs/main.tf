@@ -1,8 +1,3 @@
-# AWS Provider Configuration
-provider "aws" {
-  region = "ap-southeast-1"
-}
-
 # Security Group for EC2 instance
 resource "aws_security_group" "ec2_sg" {
   name        = "ec2-security-group"
