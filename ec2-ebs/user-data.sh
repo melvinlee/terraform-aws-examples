@@ -4,10 +4,13 @@
 yum update -y
 
 # Install Python pip
-yum install -y python3-pip
+yum install -y python3 python3-pip
 
 # Install Ansible
 pip3 install ansible
+
+# Verify installation
+ansible --version
 
 # Ensure log directory exists before writing to it
 if [ ! -d "/var/log/ansible" ]; then
