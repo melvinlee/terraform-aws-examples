@@ -69,7 +69,7 @@ resource "aws_instance" "web_server" {
   subnet_id              = tolist(data.aws_subnets.default.ids)[0]
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   iam_instance_profile   = aws_iam_instance_profile.ssm_instance_profile.name
-  user_data              = file("${path.module}/user-data.sh")
+  user_data              = file("${path.module}/mount-disk-ansible.sh")
 
   # Use the variable to control public IP assignment
   associate_public_ip_address = var.associate_public_ip
