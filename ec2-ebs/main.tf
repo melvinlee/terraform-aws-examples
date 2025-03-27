@@ -9,13 +9,16 @@ resource "aws_security_group" "ec2_sg" {
   description = "Allow SSH inbound traffic"
   vpc_id      = data.aws_vpc.default.id
 
-  # You can comment this ingress rule out if you want to rely solely on Session Manager
-  ingress {
-    description = "SSH from Internet"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+  # SSH ingress rule that can be toggled using the allow_ssh variable
+  dynamic "ingress" {
+    for_each = var.allow_ssh ? [1] : []
+    content {
+      description = "SSH from Internet"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
   }
 
   egress {

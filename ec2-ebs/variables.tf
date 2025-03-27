@@ -3,3 +3,9 @@ variable "associate_public_ip" {
   type        = bool
   default     = false
 }
+
+variable "allow_ssh" {
+  description = "Allow SSH access to the instance"
+  type        = bool
+  default     = false       
+}
