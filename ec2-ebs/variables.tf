@@ -9,3 +9,9 @@ variable "allow_ssh" {
   type        = bool
   default     = false       
 }
+
+variable "attach_ebs_volume" {
+  description = "Whether to attach the EBS volume to the EC2 instance"
+  type        = bool
+  default     = false
+}

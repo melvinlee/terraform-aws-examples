@@ -97,8 +97,9 @@ resource "aws_ebs_volume" "data_volume" {
   }
 }
 
-# Attach the EBS volume to the EC2 instance
+# Attach the EBS volume to the EC2 instance conditionally
 resource "aws_volume_attachment" "ebs_att" {
+  count       = var.attach_ebs_volume ? 1 : 0
   device_name = "/dev/sdf"
   volume_id   = aws_ebs_volume.data_volume.id
   instance_id = aws_instance.web_server.id
