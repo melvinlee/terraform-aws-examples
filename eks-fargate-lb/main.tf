@@ -50,17 +50,6 @@ module "eks" {
 
   # Fargate profiles
   fargate_profiles = {
-    default = {
-      name = "default"
-      selectors = [
-        {
-          namespace = "default"
-        },
-        {
-          namespace = "kube-system"
-        }
-      ]
-    }
     nginx = {
       name = "nginx"
       selectors = [
@@ -70,6 +59,6 @@ module "eks" {
       ]
     }
   }
-
+  
   tags = local.tags
 }
