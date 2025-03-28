@@ -9,13 +9,9 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = "~> 2.23"
     }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "~> 2.10"
-    }
     time = {
       source  = "hashicorp/time"
-      version = "~> 0.9.0"
+      version = "~> 0.13.0"
     }
     null = {
       source  = "hashicorp/null"
@@ -26,7 +22,7 @@ terraform {
 
 # AWS Provider Configuration
 provider "aws" {
-  region = "ap-southeast-1"
+  region = var.region
 }
 
-# The Kubernetes and Helm provider configurations are defined in main.tf
+# The Kubernetes provider configuration is defined in main.tf
