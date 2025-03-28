@@ -14,8 +14,8 @@ This example sets up the following components:
 
 - A VPC with public and private subnets across 3 availability zones
 - An Amazon EKS cluster with Fargate profiles for:
-  - The `default` and `kube-system` namespaces
   - A dedicated `nginx` namespace
+- A managed node group with t3.micro EC2 instances for workloads that cannot run on Fargate
 - A Nginx deployment with 2 replicas and targetgroupbinding in the `nginx` namespace
 - A Kubernetes service to expose the Nginx deployment within the cluster
 - An optional ingress resource for external access
@@ -85,5 +85,6 @@ terraform destroy
 ## Notes
 
 - AWS Fargate eliminates the need to manage EC2 instances for your EKS workloads
+- The t3.small node group provides compute capacity for workloads that require EC2 instances
 - This example uses the latest Nginx image; you can modify the version in the kubernetes.tf file
 - Resource requests and limits can be adjusted based on your workload requirements
