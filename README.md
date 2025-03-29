@@ -25,6 +25,23 @@ This repository contains example Terraform configurations for provisioning diffe
   - Configures logging for deployment processes
   - Uses SSM for secure instance management
 
+### EKS with Fargate
+- **Path**: [`eks-fargate/`](./eks-fargate/)
+- **Description**: Sets up an Amazon EKS cluster using Fargate profiles for serverless container deployment.
+- **Features**:
+  - Serverless Kubernetes cluster without managing EC2 instances
+  - Custom VPC configuration with private and public subnets
+  - Includes example Nginx deployment
+
+### EKS with Fargate and Load Balancer
+- **Path**: [`eks-fargate-lb/`](./eks-fargate-lb/)
+- **Description**: Extends the basic EKS Fargate setup with an Application Load Balancer for external access.
+- **Features**:
+  - Application Load Balancer with security groups
+  - Target group configuration for Nginx service
+  - Public endpoint for accessing containerized applications
+  - Health check configuration
+
 ### Elasticsearch Multi-AZ
 - **Path**: [`elasticsearch-multi-az/`](./elasticsearch-multi-az/)
 - **Description**: Deploys an Elasticsearch cluster across multiple availability zones for high availability.
