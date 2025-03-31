@@ -1,6 +1,7 @@
-# Terraform AWS Examples
+# Terraform AWS Examples [![Devbox Ready](https://img.shields.io/badge/Devbox-Ready-blue)](https://www.jetpack.io/devbox/)
 
 A collection of Terraform modules demonstrating various AWS infrastructure patterns and best practices.
+
 
 ## Overview
 
@@ -49,6 +50,39 @@ This repository contains example Terraform configurations for provisioning diffe
 ### Elasticsearch Single-AZ
 - **Path**: [`elasticsearch-single-az/`](./elasticsearch-single-az/)
 - **Description**: Sets up a single-AZ Elasticsearch deployment with security groups and SSM integration.
+
+## Development Environment
+
+This project uses [devbox](https://www.jetpack.io/devbox/) to create a consistent development environment with all necessary tools.
+
+### Prerequisites
+
+- Install devbox: https://www.jetpack.io/devbox/docs/installing_devbox/
+
+### Included Tools
+
+The devbox environment includes:
+- OpenTofu (Terraform compatible)
+- kubectl
+- Helm
+- k9s
+
+### Getting Started with Devbox
+
+1. Initialize the devbox environment:
+   ```
+   devbox shell
+   ```
+
+2. This will automatically install all required tools and dependencies
+
+3. Verify installations:
+   ```
+   tofu --version
+   kubectl version --client
+   helm version
+   k9s version
+   ```
 
 ## Prerequisites
 

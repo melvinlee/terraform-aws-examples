@@ -1,0 +1,24 @@
+{
+  "packages": [
+    "opentofu@latest",
+    "kubectl@latest",
+    "kubernetes-helm@latest",
+    "k9s@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Terraform AWS Examples Development Environment'"
+    ],
+    "scripts": {
+      "test": [
+        "echo 'Running tests...'"
+      ],
+      "lint": [
+        "echo 'Linting Terraform code...'"
+      ]
+    }
+  },
+  "nixpkgs": {
+    "commit": "6e2f00c83911461438301db0dba5281197fe4b3a"
+  }
+}
