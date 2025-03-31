@@ -47,7 +47,7 @@ resource "aws_autoscaling_group" "asg" {
 
   health_check_grace_period = 300
   force_delete              = true
-  vpc_zone_identifier       = data.aws_subnet_ids.default.ids
+  vpc_zone_identifier       = data.aws_subnet.default.ids
 
   launch_template {
     id      = aws_launch_template.this[0].id
