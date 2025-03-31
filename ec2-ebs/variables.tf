@@ -7,7 +7,7 @@ variable "associate_public_ip" {
 variable "allow_ssh" {
   description = "Allow SSH access to the instance"
   type        = bool
-  default     = false       
+  default     = false
 }
 
 variable "attach_ebs_volume" {

@@ -13,8 +13,13 @@
       "test": [
         "echo 'Running tests...'"
       ],
-      "lint": [
-        "echo 'Linting Terraform code...'"
+      "fmt": [
+        "echo 'Format Terraform code...'",
+        "echo 'Running format check on all modules...'",
+        "find . -type f -name \"*.tf\" | grep -v \".terraform\" | xargs dirname | sort -u | while read dir; do",
+        "  echo \"Checking format for ${dir}\"", 
+        "  tofu -chdir=${dir} fmt -recursive || exit 1",
+        "done"
       ]
     }
   },

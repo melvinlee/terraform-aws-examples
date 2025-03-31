@@ -1,5 +1,5 @@
 output "private_key_pem" {
-  value = var.output_private_key == true ? tls_private_key.key.private_key_pem : ""
+  value     = var.output_private_key == true ? tls_private_key.key.private_key_pem : ""
   sensitive = true
 }
 

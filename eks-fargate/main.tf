@@ -8,7 +8,7 @@ locals {
   azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
   tags = {
-    Name    = local.name
+    Name      = local.name
     ManagedBy = "Terraform"
   }
 }
@@ -24,12 +24,12 @@ module "eks" {
   cluster_name                   = local.name
   cluster_version                = "1.32"
   cluster_endpoint_public_access = true
-  
+
   # Disable all control plane logging
-  cluster_enabled_log_types      = []
+  cluster_enabled_log_types = []
 
   # Explicitly disable etcd encryption
-  create_kms_key = false
+  create_kms_key            = false
   cluster_encryption_config = {}
 
   cluster_addons = {

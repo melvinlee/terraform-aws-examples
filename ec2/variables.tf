@@ -1,4 +1,4 @@
 variable "output_private_key" {
-  type = bool
+  type    = bool
   default = true
 }
