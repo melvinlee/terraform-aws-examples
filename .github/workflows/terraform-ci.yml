@@ -1,0 +1,113 @@
+name: 'Terraform CI'
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**/*.tf'
+      - '**/*.tfvars'
+      - '.github/workflows/terraform-ci.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**/*.tf'
+      - '**/*.tfvars'
+
+jobs:
+  terraform-fmt:
+    name: 'Terraform Format'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: '1.5.0'
+        terraform_wrapper: false
+
+    - name: Terraform Format Check
+      run: |
+        echo "Running format check on all modules..."
+        find . -type f -name "*.tf" | grep -v ".terraform" | xargs dirname | sort -u | while read dir; do
+          echo "Checking format for ${dir}"
+          terraform -chdir=${dir} fmt -check -recursive || exit 1
+        done
+
+  terraform-validate:
+    name: 'Terraform Validate'
+    runs-on: ubuntu-latest
+    needs: terraform-fmt
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: '1.5.0'
+        terraform_wrapper: false
+
+    - name: Terraform Init and Validate
+      run: |
+        modules=$(find . -maxdepth 1 -type d -not -path "*/\.*" | grep -v "^\.$")
+        
+        for dir in $modules; do
+          if [ -f "${dir}/provider.tf" ] || [ -f "${dir}/main.tf" ]; then
+            echo "Initializing and validating ${dir}"
+            terraform -chdir=${dir} init -backend=false
+            terraform -chdir=${dir} validate
+          fi
+        done
+
+  tflint:
+    name: 'TFLint'
+    runs-on: ubuntu-latest
+    needs: terraform-validate
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup TFLint
+      uses: terraform-linters/setup-tflint@v3
+      with:
+        tflint_version: v0.44.1
+
+    - name: Init TFLint
+      run: tflint --init
+      
+    - name: Run TFLint
+      run: |
+        modules=$(find . -maxdepth 1 -type d -not -path "*/\.*" | grep -v "^\.$")
+        
+        # Create basic TFLint config if it doesn't exist
+        if [ ! -f .tflint.hcl ]; then
+          echo "plugin \"aws\" {" > .tflint.hcl
+          echo "  enabled = true" >> .tflint.hcl
+          echo "}" >> .tflint.hcl
+        fi
+        
+        for dir in $modules; do
+          if [ -f "${dir}/provider.tf" ] || [ -f "${dir}/main.tf" ]; then
+            echo "Running TFLint in ${dir}"
+            tflint --chdir=${dir}
+          fi
+        done
+
+  checkov:
+    name: 'Checkov Security Scan'
+    runs-on: ubuntu-latest
+    needs: terraform-validate
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Run Checkov scan
+      uses: bridgecrewio/checkov-action@master
+      with:
+        directory: .
+        framework: terraform
+        skip_path: ".devbox"
+        quiet: false
+        soft_fail: false

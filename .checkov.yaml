@@ -1,0 +1,21 @@
+branch: main
+download-external-modules: false
+evaluate-variables: true
+external-modules-download-path: .external_modules
+framework:
+  - terraform
+directory:
+  - .
+skip-path:
+  - .devbox
+  - "**/.terraform/**"
+skip-check:
+  - CKV_AWS_338  # Ensure CloudFront distribution has a default root object configured
+  - CKV_AWS_117  # Ensure that AWS Lambda function is configured inside a VPC (optional based on use case)
+
+compact: true
+output:
+  - cli
+  - json
+  - junitxml
+summary-position: top
