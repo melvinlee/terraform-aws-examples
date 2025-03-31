@@ -87,7 +87,7 @@ The devbox environment includes:
 ## Prerequisites
 
 - AWS CLI configured with appropriate credentials
-- Terraform v0.12+ installed
+- Terraform/OpenTofu v0.19+ installed
 - Basic understanding of AWS services and Terraform
 
 ## Usage
@@ -97,12 +97,12 @@ Each module is independent and can be used separately. To use a specific module:
 1. Navigate to the module directory
 2. Initialize the Terraform configuration:
    ```
-   terraform init
+   tofu init
    ```
 3. Review and modify the configuration as needed
 4. Apply the Terraform configuration:
    ```
-   terraform apply
+   tofu apply
    ```
 
 ## Structure
