@@ -33,5 +33,5 @@ data "aws_subnet_ids" "default" {
 }
 
 data "template_file" "bootstrap" {
-  template = "${file("${path.module}/bootstrap.tpl")}"
+  template = file("${path.module}/bootstrap.tpl")
 }
