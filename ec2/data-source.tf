@@ -1,22 +1,16 @@
+# Get the latest Amazon Linux 2 AMI
 data "aws_ami" "amazon_linux" {
   most_recent = true
-
-  owners = ["amazon"]
+  owners      = ["amazon"]
 
   filter {
-    name = "name"
-
-    values = [
-      "amzn-ami-hvm-*-x86_64-gp2",
-    ]
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
   }
 
   filter {
-    name = "owner-alias"
-
-    values = [
-      "amazon",
-    ]
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 }
 
@@ -26,8 +20,9 @@ data "aws_vpc" "default" {
 
 }
 
-data "aws_subnet_ids" "default" {
-
-  vpc_id = data.aws_vpc.default.id
-
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
 }

@@ -14,7 +14,7 @@ resource "aws_instance" "web" {
 }
 
 resource "aws_network_interface" "this" {
-  subnet_id       = element(tolist(data.aws_subnet_ids.default.ids), 0)
+  subnet_id       = element(tolist(data.aws_subnets.default.ids), 0)
   security_groups = [aws_security_group.this.id]
   tags = {
     Name = "primary_network_interface"
