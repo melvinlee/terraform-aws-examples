@@ -20,7 +20,7 @@ resource "aws_elasticsearch_domain" "this" {
 
   vpc_options {
     subnet_ids = [
-      tolist(data.aws_subnet_ids.default.ids)[0],
+      tolist(data.aws_subnets.default.ids)[0],
     ]
 
     security_group_ids = [aws_security_group.es.id]
