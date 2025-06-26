@@ -1,7 +1,7 @@
 {
   "packages": [
     "opentofu@latest",
-    "kubectl@latest",
+    "kubectl@1.33.2",
     "kubernetes-helm@latest",
     "k9s@latest"
   ],
