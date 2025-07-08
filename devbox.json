@@ -3,7 +3,7 @@
     "opentofu@latest",
     "kubectl@latest",
     "kubernetes-helm@latest",
-    "k9s@latest"
+    "k9s@0.50.6"
   ],
   "shell": {
     "init_hook": [
