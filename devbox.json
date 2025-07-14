@@ -2,7 +2,7 @@
   "packages": [
     "opentofu@1.10.2",
     "kubectl@1.33.2",
-    "kubernetes-helm@latest",
+    "kubernetes-helm@3.18.4",
     "k9s@0.50.6"
   ],
   "shell": {
