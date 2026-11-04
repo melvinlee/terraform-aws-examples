@@ -26,7 +26,7 @@ locals {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 20.0"
+  version = "~> 21.0"
 
   cluster_name                             = local.name
   cluster_version                          = local.cluster_version
@@ -101,7 +101,7 @@ module "eks" {
 # Controller IAM role (Pod Identity), node IAM role, SQS interruption queue and EventBridge rules
 module "karpenter" {
   source  = "terraform-aws-modules/eks/aws//modules/karpenter"
-  version = "~> 20.0"
+  version = "~> 21.0"
 
   cluster_name = module.eks.cluster_name
 
