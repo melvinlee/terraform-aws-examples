@@ -112,8 +112,14 @@ resource "helm_release" "karpenter" {
   wait             = true
   create_namespace = false
 
+  # The Pod Identity association must exist before the controller pods start,
+  # otherwise the pods are created without AWS credentials
+  depends_on = [module.karpenter]
+
   values = [
     yamlencode({
+      # A single controller node cannot satisfy the chart's pod anti-affinity for two replicas
+      replicas = 1
       settings = {
         clusterName       = module.eks.cluster_name
         clusterEndpoint   = module.eks.cluster_endpoint
