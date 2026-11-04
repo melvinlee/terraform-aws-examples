@@ -41,6 +41,22 @@ module "eks" {
     eks-pod-identity-agent = {}
   }
 
+  # Read-only Kubernetes access for the console user below
+  access_entries = {
+    console = {
+      principal_arn = aws_iam_user.console.arn
+
+      policy_associations = {
+        view = {
+          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSAdminViewPolicy"
+          access_scope = {
+            type = "cluster"
+          }
+        }
+      }
+    }
+  }
+
   vpc_id                   = module.vpc.vpc_id
   subnet_ids               = module.vpc.private_subnets
   control_plane_subnet_ids = module.vpc.intra_subnets
@@ -101,42 +117,4 @@ module "karpenter" {
   }
 
   tags = local.tags
-}
-
-resource "helm_release" "karpenter" {
-  name             = "karpenter"
-  namespace        = "kube-system"
-  repository       = "oci://public.ecr.aws/karpenter"
-  chart            = "karpenter"
-  version          = "1.6.0"
-  wait             = true
-  create_namespace = false
-
-  # The Pod Identity association must exist before the controller pods start,
-  # otherwise the pods are created without AWS credentials
-  depends_on = [module.karpenter]
-
-  values = [
-    yamlencode({
-      # A single controller node cannot satisfy the chart's pod anti-affinity for two replicas
-      replicas = 1
-      settings = {
-        clusterName       = module.eks.cluster_name
-        clusterEndpoint   = module.eks.cluster_endpoint
-        interruptionQueue = module.karpenter.queue_name
-      }
-      serviceAccount = {
-        name = module.karpenter.service_account
-      }
-      tolerations = [
-        {
-          key      = "CriticalAddonsOnly"
-          operator = "Exists"
-        }
-      ]
-      nodeSelector = {
-        "karpenter.sh/controller" = "true"
-      }
-    })
-  ]
 }
