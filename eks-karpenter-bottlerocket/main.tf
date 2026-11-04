@@ -89,6 +89,9 @@ module "karpenter" {
 
   cluster_name = module.eks.cluster_name
 
+  # Associates the controller role with the Karpenter service account
+  create_pod_identity_association = true
+
   # The node role is referenced by name from the EC2NodeClass
   node_iam_role_use_name_prefix = false
   node_iam_role_name            = "${local.name}-node"
