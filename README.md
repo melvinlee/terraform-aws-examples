@@ -9,47 +9,17 @@ This repository contains example Terraform configurations for provisioning diffe
 
 ## Modules
 
-### Auto Scaling Group
-- **Path**: [`auto-scaling-group/`](./auto-scaling-group/)
-- **Description**: Demonstrates how to create an Auto Scaling Group with launch templates and scaling policies.
-
-### EC2 Instance
-- **Path**: [`ec2/`](./ec2/)
-- **Description**: Basic EC2 instance provisioning with security groups and SSH key management.
-
-### EC2 with EBS Volume
-- **Path**: [`ec2-ebs/`](./ec2-ebs/)
-- **Description**: Provisions an EC2 instance with an additional EBS volume, including Ansible integration for automated volume mounting.
-- **Features**:
-  - Attaches and mounts a 20GB EBS volume to `/data`
-  - Includes automated formatting and mounting via Ansible playbooks
-  - Configures logging for deployment processes
-  - Uses SSM for secure instance management
-
-### EKS with Fargate
-- **Path**: [`eks-fargate/`](./eks-fargate/)
-- **Description**: Sets up an Amazon EKS cluster using Fargate profiles for serverless container deployment.
-- **Features**:
-  - Serverless Kubernetes cluster without managing EC2 instances
-  - Custom VPC configuration with private and public subnets
-  - Includes example Nginx deployment
-
-### EKS with Fargate and Load Balancer
-- **Path**: [`eks-fargate-lb/`](./eks-fargate-lb/)
-- **Description**: Extends the basic EKS Fargate setup with an Application Load Balancer for external access.
-- **Features**:
-  - Application Load Balancer with security groups
-  - Target group configuration for Nginx service
-  - Public endpoint for accessing containerized applications
-  - Health check configuration
-
-### Elasticsearch Multi-AZ
-- **Path**: [`elasticsearch-multi-az/`](./elasticsearch-multi-az/)
-- **Description**: Deploys an Elasticsearch cluster across multiple availability zones for high availability.
-
-### Elasticsearch Single-AZ
-- **Path**: [`elasticsearch-single-az/`](./elasticsearch-single-az/)
-- **Description**: Sets up a single-AZ Elasticsearch deployment with security groups and SSM integration.
+| Module | Description | Key features |
+|--------|-------------|--------------|
+| [`auto-scaling-group/`](./auto-scaling-group/) | Auto Scaling Group with launch templates and scaling policies | Launch template, scaling policies |
+| [`ec2/`](./ec2/) | Basic EC2 instance provisioning | Security groups, SSH key management |
+| [`ec2-ebs/`](./ec2-ebs/) | EC2 instance with an additional EBS volume | 20GB volume mounted at `/data`, Ansible formatting/mounting, deployment logging, SSM access |
+| [`eks-fargate/`](./eks-fargate/) | EKS cluster using Fargate profiles | Serverless Kubernetes, custom VPC with private/public subnets, example Nginx deployment |
+| [`eks-fargate-lb/`](./eks-fargate-lb/) | `eks-fargate` extended with an Application Load Balancer | ALB with security groups, Nginx target group, public endpoint, health checks |
+| [`eks-karpenter-bottlerocket/`](./eks-karpenter-bottlerocket/) | EKS cluster where Karpenter provisions Bottlerocket nodes | Pod Identity, managed node group for the controller, `EC2NodeClass`/`NodePool` manifests, read-only console user |
+| [`elasticsearch-multi-az/`](./elasticsearch-multi-az/) | Elasticsearch cluster across multiple availability zones | High availability |
+| [`elasticsearch-single-az/`](./elasticsearch-single-az/) | Single-AZ Elasticsearch deployment | Security groups, SSM integration |
+| [`rds-oracle/`](./rds-oracle/) | RDS Oracle Enterprise Edition 19c instance | BYOL, custom parameter/option groups, STATSPACK, enhanced monitoring |
 
 ## Development Environment
 
