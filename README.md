@@ -19,6 +19,7 @@ This repository contains example Terraform configurations for provisioning diffe
 | [`eks-karpenter-bottlerocket/`](./eks-karpenter-bottlerocket/) | EKS cluster where Karpenter provisions Bottlerocket nodes | Pod Identity, managed node group for the controller, `EC2NodeClass`/`NodePool` manifests, read-only console user |
 | [`elasticsearch-multi-az/`](./elasticsearch-multi-az/) | Elasticsearch cluster across multiple availability zones | High availability |
 | [`elasticsearch-single-az/`](./elasticsearch-single-az/) | Single-AZ Elasticsearch deployment | Security groups, SSM integration |
+| [`iam-user-least-privilege/`](./iam-user-least-privilege/) | IAM user that can only assume two roles | No permissions beyond sts:AssumeRole, read-only and scoped developer roles, role-switch URLs |
 | [`rds-oracle/`](./rds-oracle/) | RDS Oracle Enterprise Edition 19c instance | BYOL, custom parameter/option groups, STATSPACK, enhanced monitoring |
 
 ## Development Environment
