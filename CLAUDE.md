@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A collection of independent, standalone Terraform/OpenTofu examples for AWS — one directory per example (`ec2`, `ec2-ebs`, `auto-scaling-group`, `eks-fargate`, `eks-fargate-lb`, `elasticsearch-single-az`, `elasticsearch-multi-az`, `rds-oracle`). There is no shared root module and no cross-module references; each directory has its own `provider.tf` and is init/applied on its own. `eks-fargate-lb` builds on the `eks-fargate` pattern by duplicating (not importing) its code and adding an ALB (`load-balancer.tf`) plus `nginx/` manifests.
 
+## Agents
+
+Project agents are in `.claude/agents/` (`issue-worker`, `module-builder`, `tf-auditor`, `tf-planner`, `pr-reviewer`, `azure-pipeline`); `docs/agents.md` lists them and the usual workflow. Commits and PRs here carry no `Co-Authored-By` line.
+
 ## Commands
 
 Tooling is pinned via devbox (`devbox.json`: OpenTofu 1.10.2, kubectl, helm, k9s). Use `tofu`, not `terraform`, locally (CI uses `terraform` 1.5.0).

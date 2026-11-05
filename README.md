@@ -22,6 +22,10 @@ This repository contains example Terraform configurations for provisioning diffe
 | [`iam-user-least-privilege/`](./iam-user-least-privilege/) | IAM user that can only assume two roles | No permissions beyond sts:AssumeRole, read-only and scoped developer roles, role-switch URLs |
 | [`rds-oracle/`](./rds-oracle/) | RDS Oracle Enterprise Edition 19c instance | BYOL, custom parameter/option groups, STATSPACK, enhanced monitoring |
 
+## Claude Code agents
+
+The repo ships project agents in [`.claude/agents/`](./.claude/agents/) for building, auditing, planning and reviewing Terraform changes, and for working GitHub issues. See [docs/agents.md](./docs/agents.md) for the list and the usual workflow.
+
 ## Development Environment
 
 This project uses [devbox](https://www.jetpack.io/devbox/) to create a consistent development environment with all necessary tools.
